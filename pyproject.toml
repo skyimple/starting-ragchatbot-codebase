@@ -21,6 +21,9 @@ dev = [
     "flake8==7.1.1",
     "mypy==1.13.0",
     "flake8-pyproject==1.2.3",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "httpx>=0.27.0",
 ]
 
 [project.scripts]
@@ -74,6 +77,23 @@ exclude = [
     "venv",
     "build",
     "dist",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "api: API endpoint tests",
 ]
 
 [build-system]
